@@ -86,10 +86,53 @@ type MovieResponse = {
 // const [value, setValue] = useState(true)
 // const [value2, setValue2] = useState<boolean>(false)
 
-interface Length {
-    length: number
+// interface Length {
+//     length: number
+// }
+
+// function getValue<T extends Length>(data: T) {
+//     console.log(data.length)
+// }
+
+// 1. 조건부 타입
+
+// type IsString<T> = T extends string ? "yes" : "no"
+
+// type result1 = IsString<number>
+
+// // 2. mapped type
+
+// type Movie = {
+//     title: string,
+//     genre: string,
+//     rate: number,
+// }
+
+// //Movie의 모든 필드를 옵셔널하게 만들어버리겠다.
+// type Subset<T> = {
+//     [K in keyof T]?: T[K]
+// }
+
+// // type Subset<T> = {
+// //     readonly [K in keyof T]?: T[K] // 모든 속성이 읽기 전용 + 선택적
+// // }
+
+// const movie1: Subset<Movie> = { title: "r", genre: "action" }
+// const movie2: Subset<Movie> = { rate: 2 }
+
+
+interface Pair<T, U> {
+    first: T,
+    second: U,
+    display(): void
 }
 
-function getValue<T extends Length>(data: T) {
-    console.log(data.length)
+const pair: Pair<string, number> = {
+    first: "may",
+    second: 2,
+    display() {
+        console.log(this.first + " is " + this.second + "year(s) old.")
+    }
 }
+
+pair.display()
