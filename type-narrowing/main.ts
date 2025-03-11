@@ -73,31 +73,73 @@
 // getDate({ start: "2025-03-10", end: "" })
 
 // 4️⃣ 타입 가드 함수 사용 (사용자 정의 타입 가드) -> is
+// type Track = {
+//     title: string,
+//     releaseDate: string,
+// }
+
+// type Artist = {
+//     name: string,
+//     releaseDate: string
+// }
+
+// function isTrack(result: Track | Artist): result is Track {
+//     return (result as Track).title !== undefined
+// }
+
+// function isArtist(result: Track | Artist): result is Artist {
+//     return (result as Artist).name !== undefined
+// }
+// //result is Track, result is Artist 결과값 타입을 boolean으로 하면 안됨! => 이 함수의 리턴값이 정확히 뭐인지 딱 정해줘야함!
+
+
+// function printInfo(result: Track | Artist) {
+//     if (isTrack(result)) {
+//         console.log(result.title)
+//     }
+//     if (isArtist(result)) {
+//         console.log(result.name)
+//     }
+// }
+
+// const result: Track | Artist = {
+//     title: "hi",
+//     releaseDate: "2025",
+//     name: "meme", // 이거 에러나야하는데!, 짬뽕이 되어도 에러가 안나는 유니언타입의 함정쓰~ 합집합이구만!
+// }
+
 type Track = {
+    type: "track", //리터럴 타입으로 딱 박아 넣어줌
     title: string,
     releaseDate: string,
 }
 
 type Artist = {
+    type: "artist", //리터럴 타입으로 딱 박아 넣어줌
     name: string,
     releaseDate: string
 }
 
-function isTrack(result: Track | Artist): result is Track {
-    return (result as Track).title !== undefined
+interface Radio {
+    type: "radio",
+    title: string;
+    numberOfSongs: number
+
 }
 
-function isArtist(result: Track | Artist): result is Artist {
-    return (result as Artist).name !== undefined
+type SearchResult = Track | Artist | Radio
+
+function getTypeName(result: SearchResult) {
+    if (result.type === "track") return "track"
+    else if (result.type === "artist") return "artist"
+    //radio타입을 지나친다
+    else if (result.type === "radio") return "radio"
+    else {
+        exhaustiveCheck(result)
+        return "result"
+    }
 }
-//result is Track, result is Artist 결과값 타입을 boolean으로 하면 안됨! => 이 함수의 리턴값이 정확히 뭐인지 딱 정해줘야함!
 
-
-function printInfo(result: Track | Artist) {
-    if (isTrack(result)) {
-        console.log(result.title)
-    }
-    if (isArtist(result)) {
-        console.log(result.name)
-    }
+function exhaustiveCheck(param: never) {
+    throw new Error("error")
 }
