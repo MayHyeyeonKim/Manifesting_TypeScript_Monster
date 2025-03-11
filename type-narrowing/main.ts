@@ -126,7 +126,7 @@ interface Radio {
     numberOfSongs: number
 
 }
-
+//Exhaustiveness Check!!!!!!!!
 type SearchResult = Track | Artist | Radio
 
 function getTypeName(result: SearchResult) {
