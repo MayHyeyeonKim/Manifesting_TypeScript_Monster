@@ -1,12 +1,10 @@
 # Manifesting_TypeScript_Monster
 
-# 📘 Manifesting TypeScript Monster
-
 ## **1장: TypeScript란? 🚀**
 
 ### 1️⃣ TypeScript의 정의
 
-TypeScript(TS)는 Microsoft에서 개발한 JavaScript의 슈퍼셋(Superset)(추가 기능까지 있는 확장된 버전)이야.  
+TypeScript(TS)는 Microsoft에서 개발한 JavaScript의 슈퍼셋(Superset)(추가 기능까지 있는 확장된 버전)이야.(js가 피카츄라면 ts는 슈퍼피카츄)
 즉, JavaScript의 기능을 포함하면서 정적 타입 검사 등의 추가적인 기능을 제공하지.
 
 ✅ TS 코드 → JS 코드로 변환해야 실행 가능
